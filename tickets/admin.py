@@ -3,6 +3,9 @@ from .models import (Section, Customer, Row, Seat)
 
 
 class SeatAdmin(admin.ModelAdmin):
+    """
+    Add needed columns to Seat admin section
+    """
     list_display = ['__str__', 'section', 'customer_name', 'is_blocked',
                     'is_allocated']
 
@@ -25,6 +28,9 @@ class SeatAdmin(admin.ModelAdmin):
 
 
 class RowAdmin(admin.ModelAdmin):
+    """
+    Add needed columns to Row admin section
+    """
     list_display = ['__str__', 'section']
 
 

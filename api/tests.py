@@ -6,6 +6,9 @@ from tickets.models import Section, Row, Seat, Customer
 
 
 class TestApi(APITestCase):
+    """
+    Client Tests for Api views
+    """
     def setUp(self) -> None:
         super(TestApi, self).setUp()
         self.test_section = Section.objects.create(name='Test')
@@ -30,6 +33,9 @@ class TestApi(APITestCase):
         self.seats = Seat.objects.all()
 
     def test_sections_retrieve_api(self):
+        """
+        Test Sections retrieve api
+        """
         sections_retrieve_url = reverse('api:api_retrieve_sections')
         response = self.client.get(sections_retrieve_url, format='json')
 
@@ -37,6 +43,9 @@ class TestApi(APITestCase):
         self.assertEqual(Section.objects.get(name='Test').id, response.data.get('Test').get('id'))
 
     def test_seats_retrieve_api(self):
+        """
+        Test Seats retrieve api
+        """
         seats_retrieve_url = reverse('api:api_retrieve_seats')
         response = self.client.post(seats_retrieve_url, {
             'section_id': self.test_section.id
@@ -46,6 +55,9 @@ class TestApi(APITestCase):
         self.assertEqual(Seat.objects.first().row.order, response.data.get('A1').get('row'))
 
     def test_seating_api(self):
+        """
+        Test seating api
+        """
         seating_url = reverse('api:api_bulk_seating')
         data = {
             'section_id': self.test_section.id,

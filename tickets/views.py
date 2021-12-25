@@ -198,3 +198,40 @@ class PortalSectionSeatsByRowsFormView(generic.FormView):
     def get_success_url(self):
         messages.success(self.request, 'Row is successfully created')
         return reverse_lazy('tickets:portal_section_seats_by_row')
+
+
+class PortalCustomerManageListView(generic.ListView):
+    template_name = 'tickets/portal_customer_manage_list.html'
+    context_object_name = 'customers'
+
+    def get_queryset(self):
+        qs = Customer.objects.all()
+        return qs
+
+
+class PortalCustomerDeleteView(generic.DeleteView):
+    def get_object(self, queryset=None):
+        customer_id = self.kwargs.get('customer_id')
+        obj = get_object_or_404(Customer, id=customer_id)
+        return obj
+
+    def get_success_url(self):
+        messages.success(self.request, 'Customer is successfully deleted')
+        return reverse_lazy('tickets:portal_customer_manage')
+
+
+class PortalResetView(generic.TemplateView):
+    template_name = 'tickets/portal_reset.html'
+
+    def get(self, request, *args, **kwargs):
+        delete_type = self.request.GET.get('delete')
+
+        if delete_type == 'sections':
+            Section.objects.all().delete()
+            messages.success(self.request, 'All Sections are deleted')
+
+        elif delete_type == 'customers':
+            messages.success(self.request, 'All Customers are deleted')
+            Customer.objects.all().delete()
+
+        return super(PortalResetView, self).get(request, *args, **kwargs)

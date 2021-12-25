@@ -110,6 +110,12 @@ def seating(section_id, customer):
 
 
 def bulk_seating(section_id, customers, loop=0):
+    """
+    Recursive function for optimize seating of multiple customers
+    :param section_id: id of target section
+    :param customers: list of customers objects
+    :param loop: indicator of number of retries
+    """
     for customer in customers:
         s = seating(section_id, customer)
 
@@ -121,6 +127,11 @@ def bulk_seating(section_id, customers, loop=0):
 
 
 def row_name_generator(row_index):
+    """
+    Generate name of rows based on alphabets
+    :param row_index: index of the target row in all rows
+    :return: string name of the row
+    """
     alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
                  'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
                  'Y', 'Z']
@@ -137,4 +148,3 @@ def row_name_generator(row_index):
         row_name.append(alphabets[row_index % len(alphabets)])
 
         return ''.join(row_name)
-

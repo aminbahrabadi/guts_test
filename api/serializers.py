@@ -2,6 +2,9 @@ from rest_framework import serializers
 
 
 class SeatingSerializer(serializers.Serializer):
+    """
+    Serializer for seating Api.
+    """
     section_id = serializers.IntegerField()
     customer_list = serializers.ListField()
 
@@ -20,6 +23,9 @@ class SeatingSerializer(serializers.Serializer):
 
 
 class SeatsRetrieveSerializer(serializers.Serializer):
+    """
+    Serializer for retrieving all seats statuses and information in a section
+    """
     section_id = serializers.IntegerField()
 
     def validate(self, attrs):
@@ -34,4 +40,7 @@ class SeatsRetrieveSerializer(serializers.Serializer):
 
 
 class SingleCustomerRetrieveSerializer(serializers.Serializer):
+    """
+    Serializer for retrieving seats that a customer's reserved
+    """
     customer_name = serializers.CharField(max_length=255)

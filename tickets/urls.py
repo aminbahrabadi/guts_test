@@ -25,5 +25,9 @@ urlpatterns = [
          name='portal_sections_manage'),
     path('section/delete/<int:section_id>/', views.PortalSectionDeleteView.as_view(),
          name='portal_section_delete'),
-
+    path('customer/list/', views.PortalCustomerManageListView.as_view(),
+         name='portal_customer_manage'),
+    path('customer/delete/<int:customer_id>/', views.PortalCustomerDeleteView.as_view(),
+         name='portal_customer_delete'),
+    path('reset/', views.PortalResetView.as_view(), name='portal_reset'),
 ]

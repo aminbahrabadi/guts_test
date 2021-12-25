@@ -5,6 +5,9 @@ from tickets.models import Section, Row, Customer, Seat
 
 
 class TestTicketViews(TestCase):
+    """
+    Client tests of ticket views
+    """
     def setUp(self) -> None:
         super(TestTicketViews, self).setUp()
         self.section_create_url = reverse('tickets:portal_section_create')
@@ -12,6 +15,9 @@ class TestTicketViews(TestCase):
         self.client = Client()
 
     def test_section_create(self):
+        """
+        Test of section creation
+        """
         response = self.client.post(self.section_create_url, {
             'name': 'test section',
             'is_curved': False
@@ -20,6 +26,9 @@ class TestTicketViews(TestCase):
         self.assertTrue(Section.objects.filter(name='test section').exists())
 
     def test_section_update(self):
+        """
+        Test of section update
+        """
         section = Section.objects.create(name='test section')
         section_update_url = reverse('tickets:portal_section_update',
                                      kwargs={'section_id': section.id})
@@ -33,6 +42,9 @@ class TestTicketViews(TestCase):
         self.assertFalse(Section.objects.filter(is_curved=True).exists())
 
     def test_create_seats(self):
+        """
+        Test of seat creation
+        """
         create_seats_url = reverse('tickets:portal_section_equal_seats_create')
         response = self.client.post(create_seats_url, {
             'section': self.test_section.id,
@@ -47,6 +59,9 @@ class TestTicketViews(TestCase):
         self.assertEqual(rows[0].number_of_seats, 5)
 
     def test_create_seats_by_row(self):
+        """
+        Test of seat creation based on rows
+        """
         create_seats_by_row_url = reverse('tickets:portal_section_seats_by_row')
         response = self.client.post(create_seats_by_row_url, {
             'section': self.test_section.id,
@@ -59,6 +74,9 @@ class TestTicketViews(TestCase):
         self.assertEqual(rows[0].number_of_seats, 10)
 
     def test_customer_create(self):
+        """
+        Test of customer creation
+        """
         customer_create_url = reverse('tickets:portal_customer_create')
         Row.objects.create(name='A',
                            section_id=self.test_section.id,
@@ -78,6 +96,9 @@ class TestTicketViews(TestCase):
         self.assertEqual(customers[0].reserve_name, 'test customer')
 
     def test_section_delete(self):
+        """
+        Test of section delete
+        """
         section_delete_url = reverse('tickets:portal_section_delete',
                                      kwargs={'section_id': self.test_section.id})
         response = self.client.post(section_delete_url)
@@ -86,6 +107,9 @@ class TestTicketViews(TestCase):
         self.assertFalse(Section.objects.filter(id=self.test_section.id))
 
     def test_seating(self):
+        """
+        Test Seating process
+        """
         number_of_test_rows = 3
         number_of_seats = 8
         row_letters = ['A', 'B', 'C']

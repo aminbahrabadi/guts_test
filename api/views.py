@@ -9,6 +9,9 @@ from .serializers import (SeatingSerializer, SeatsRetrieveSerializer,
 
 
 class BulkSeatingApiView(APIView):
+    """
+    Seating Api
+    """
     def post(self, request):
         serializer = SeatingSerializer(data=request.data)
 
@@ -17,6 +20,7 @@ class BulkSeatingApiView(APIView):
             customers = serializer.validated_data.get('customer_list')
 
             customer_objects_list = []
+            # create and get customers
             for customer_list in customers:
                 aisle = 'aisle' == customer_list[1]
                 customer = Customer.objects.create(
@@ -30,6 +34,7 @@ class BulkSeatingApiView(APIView):
             if customer_objects_list:
                 bulk_seating(section_id, customer_objects_list)
 
+            # add result to a dictionary
             seats_dict = {}
             seats = Seat.objects.filter(row__section_id=section_id)
 
@@ -52,6 +57,9 @@ class BulkSeatingApiView(APIView):
 
 
 class SeatsRetrieveApi(APIView):
+    """
+    Seats Retrieve Api
+    """
     def post(self, request):
         serializer = SeatsRetrieveSerializer(data=request.data)
 
@@ -79,6 +87,9 @@ class SeatsRetrieveApi(APIView):
 
 
 class SingleSeatRetrieveApi(APIView):
+    """
+    Api for getting seats that a customer's reserved
+    """
     def post(self, request):
         serializer = SingleCustomerRetrieveSerializer(data=request.data)
 
@@ -100,6 +111,9 @@ class SingleSeatRetrieveApi(APIView):
 
 
 class SectionsRetrieveApi(APIView):
+    """
+    Api for retrieving all sections status and information
+    """
     def get(self, request):
         sections = Section.objects.all().order_by('id')
 
