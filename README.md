@@ -24,3 +24,33 @@ You can test live demo here: [Theater Seating Algorithm / API](https://guts.ir)
 4. Seat customers
 ## Reseting
 You can delete all Sections and all Customers by browsing to reset section. The reset section can be found in the navbar items.
+## Api data
+1. Sections Retrieve (GET request):
+<br />URL: ```api/retrieve-sections/```
+2. Seats Retrieve (POST request):
+<br />URL: ```api/retrieve-seats/```
+<br />Data load sample: ```{
+   "section_id":1
+}```
+3. Ticket wallet api:
+<br />URL: ```api/retrieve-single-seat/```
+<br />Data load sample: ```{
+   "customer_name":"Amin"
+}```
+4. Seat customers api:
+<br />URL: ```api/bulk-seating/```
+<br />Data load sample: ```{
+   "section_id":1,
+   "customer_list":[
+      [
+         "A",
+         "aisle",
+         "3"
+      ],
+      [
+         "B",
+         "",
+         "3"
+      ]
+   ]
+}```
