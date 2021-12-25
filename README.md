@@ -20,3 +20,5 @@ You can test live demo here: [Theater Seating Algorithm / API](https://guts.ir)
 2. Create seats in the section
 3. Create customers
 4. Seat customers
+## Reseting
+You can delete all Sections and all Customers by browsing to reset section. The reset section can be found in the navbar items.
