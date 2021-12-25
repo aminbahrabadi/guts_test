@@ -13,7 +13,9 @@ You can test live demo here: [Theater Seating Algorithm / API](https://guts.ir)
 <br />```python manage.py migrate```
 6. Run server:
 <br />```python manage.py runserver```
-7. Open the browser and browse this URL:
+7. You can run tests:
+<br />```python manage.py test```
+8. Open the browser and browse this URL:
 <br />```127.0.0.1:8000```
 ## Quickstart
 1. Create a section
