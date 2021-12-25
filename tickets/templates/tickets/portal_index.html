@@ -1,0 +1,45 @@
+{% extends 'portal_base.html' %}
+{% block main_content %}
+    <div class="container">
+        <div class="movie-container">
+
+            <ul class="showcase">
+                <li>
+                    <div class="seat blocked"></div>
+                    <small>N/A</small>
+                </li>
+                <li>
+                    <div class="seat unallocated"></div>
+                    <small>Unallocated</small>
+                </li>
+                <li>
+                    <div class="seat occupied"></div>
+                    <small>Allocated</small>
+                </li>
+            </ul>
+
+            <div class="container">
+                <div class="screen"></div>
+
+                {% for section in sections %}
+                    <div class="mb-3" id="rows-container">
+                    <p class="text-center mb-0 mt-1"><small>{{ section.name }}</small></p>
+                        {% for row in section.rows.all %}
+                            <div class="row {% if section.is_curved %}curved{% endif %}">
+                                <small class="mx-1">{{ row.name }}</small>
+                                {% for seat in row.seats.all %}
+                                    <div class="seat {% if seat.is_allocated %}occupied{% elif seat.is_blocked %}blocked{% endif %}" data-toggle="tooltip"
+                                         data-placement="top"
+                                            {% if seat.is_allocated %}
+                                         title="{{ seat.customer }}"{% endif %}></div>
+                                {% endfor %}
+                                <small class="mx-1">{{ row.name }}</small>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

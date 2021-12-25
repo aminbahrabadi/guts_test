@@ -1,0 +1,50 @@
+{% extends 'portal_base.html' %}
+{% load crispy_forms_filters crispy_forms_tags %}
+{% block main_content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Manage seats</h1>
+            </div>
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped table-sm ">
+                        <caption>List of seats</caption>
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">section</th>
+                            <th scope="col">row</th>
+                            <th scope="col">is available</th>
+                            <th scope="col">is allocated</th>
+                            <th scope="col">is blocked</th>
+                            <th scope="col">customer</th>
+                            <th scope="col">manage</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for seat in seats %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ seat.row.section }}</td>
+                            <td>{{ seat.row }}</td>
+                            <td>{{ seat.is_available }}</td>
+                            <td>{{ seat.is_allocated }}</td>
+                            <td>{{ seat.is_blocked }}</td>
+                            <td>{{ seat.customer.reserve_name|default:'-' }}</td>
+                        <td>
+                            <a href="{% url 'tickets:portal_seat_update' seat.id %}">
+                                edit</a>
+                        </td>
+
+
+                        </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

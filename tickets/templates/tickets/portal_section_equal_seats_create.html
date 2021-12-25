@@ -1,0 +1,18 @@
+{% extends 'portal_base.html' %}
+{% load crispy_forms_filters crispy_forms_tags %}
+{% block main_content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Create Seats in a Section</h1>
+            </div>
+            <div class="col-md-12">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button type="submit" class="btn btn-lg btn-primary">Create</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -8,12 +8,14 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
 
 
-# Application definition
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = '6z*y6aemgr1_-ktxdp*p1a0zm10or%ucl@$#^!oamq-79n=3(qf'
 
+
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -23,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'crispy_forms',
 
     'tickets',
     'api',

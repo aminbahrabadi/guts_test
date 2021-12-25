@@ -1,0 +1,101 @@
+{% extends 'portal_base.html' %}
+{% load crispy_forms_filters crispy_forms_tags %}
+{% block main_content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Manage sections</h1>
+            </div>
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped table-sm ">
+                        <caption>List of sections</caption>
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">name</th>
+                            <th scope="col">number of rows</th>
+                            <th scope="col">is curved</th>
+                            <th scope="col">manage</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for section in sections %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>{{ section.name }}</td>
+                                <td>{{ section.rows.count }}</td>
+                                <td>{{ section.is_curved }}</td>
+                                <td>
+                                    <a href="{% url 'tickets:portal_section_update' section.id %}" class="text-primary">
+                                        edit</a>
+                                    <span class="mx-2">|</span>
+                                    <form class="d-inline-block delete-form"
+                                          id="{{ section.id }}"
+                                          method="post"
+                                          action="{% url 'tickets:portal_section_delete' section.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit"
+                                                class="btn btn-danger btn-sm d-inline-block">
+                                            delete
+                                        </button>
+                                    </form>
+
+                                </td>
+
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{% url 'tickets:portal_section_create' %}"
+                   class="btn btn-primary btn-sm d-inline-block">
+                    Create new section</a>
+                <a href="{% url 'tickets:portal_section_equal_seats_create' %}"
+                   class="btn btn-primary btn-sm d-inline-block">
+                    Create seats</a>
+                <a href="{% url 'tickets:portal_section_seats_by_row' %}"
+                   class="btn btn-primary btn-sm d-inline-block">
+                    Create seats by rows</a>
+                <a href="{% url 'tickets:portal_seats_manage' %}"
+                   class="btn btn-primary btn-sm d-inline-block">
+                    Manage seats</a>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extra_scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"
+            integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $('.delete-form').on('submit', function (e) {
+            e.preventDefault()
+            let form = $(this)
+            bootbox.confirm({
+                message: "Are you sure?",
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        form.unbind('submit').submit();
+                    }
+                }
+            });
+        })
+    </script>
+{% endblock %}
