@@ -77,6 +77,23 @@
                     </div>
                 </li>
 
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="apiDropdown" role="button"
+                       data-toggle="dropdown" aria-expanded="false">
+                        API
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="apiDropdown">
+                        <a class="dropdown-item"
+                           href="{% url 'api:api_retrieve_sections' %}">Sections Retrieve</a>
+                        <a class="dropdown-item"
+                           href="{% url 'api:api_retrieve_seats' %}">Seats Retrieve</a>
+                        <a class="dropdown-item"
+                           href="{% url 'api:api_retrieve_single_seat' %}">Ticket Wallet</a>
+                        <a class="dropdown-item"
+                           href="{% url 'api:api_bulk_seating' %}">Seating API</a>
+                    </div>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'tickets:portal_reset' %}">Reset</a>
                 </li>
