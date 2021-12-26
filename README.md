@@ -27,6 +27,7 @@ Click on ```Quickstart``` button on the navbar to create a section with 3 rows a
 ## Reseting
 You can delete all Sections and all Customers by browsing to reset section. The reset section can be found in the navbar items.
 ## Api
+API links can be found on the navbar.
 ### Sections Retrieve (GET request):
 <br />URL: ```/api/retrieve-sections/```
 ### Seats Retrieve (POST request):
