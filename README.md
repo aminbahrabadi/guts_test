@@ -28,19 +28,19 @@ Click on ```Quickstart``` button on the navbar to create a section with 3 rows a
 You can delete all Sections and all Customers by browsing to reset section. The reset section can be found in the navbar items.
 ## Api
 ### Sections Retrieve (GET request):
-<br />URL: ```api/retrieve-sections/```
+<br />URL: ```/api/retrieve-sections/```
 ### Seats Retrieve (POST request):
-<br />URL: ```api/retrieve-seats/```
+<br />URL: ```/api/retrieve-seats/```
 <br />Data load sample: ```{
    "section_id":1
 }```
 ### Ticket wallet api (POST request):
-<br />URL: ```api/retrieve-single-seat/```
+<br />URL: ```/api/retrieve-single-seat/```
 <br />Data load sample: ```{
    "customer_name":"Amin"
 }```
 ### Seat customers api (POST request):
-<br />URL: ```api/bulk-seating/```
+<br />URL: ```/api/bulk-seating/```
 <br />Data load sample: ```{
    "section_id":1,
    "customer_list":[
