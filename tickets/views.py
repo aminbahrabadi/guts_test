@@ -235,3 +235,39 @@ class PortalResetView(generic.TemplateView):
             Customer.objects.all().delete()
 
         return super(PortalResetView, self).get(request, *args, **kwargs)
+
+
+class PortalQuickStartView(generic.RedirectView):
+    """
+    Create a Section and Seats for a quickstart
+    """
+
+    def get(self, request, *args, **kwargs):
+        # create section
+        section = Section.objects.create(
+            name='Quickstart Hall'
+        )
+
+        # create rows
+        for i in range(3):
+            Row.objects.create(
+                name=row_name_generator(i),
+                section=section,
+                order=i + 1,
+                number_of_seats=8
+            )
+
+        # create seats
+        rows = Row.objects.filter(section_id=section.id)
+        for row in rows:
+            for i in range(row.number_of_seats):
+                Seat.objects.create(
+                  row=row,
+                  seat_number=i + 1,
+                )
+
+        return super(PortalQuickStartView, self).get(request, *args, **kwargs)
+
+    def get_redirect_url(self, *args, **kwargs):
+        messages.success(self.request, 'Quickstart Hall is successfully created')
+        return reverse_lazy('tickets:portal_index')

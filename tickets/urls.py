@@ -30,4 +30,5 @@ urlpatterns = [
     path('customer/delete/<int:customer_id>/', views.PortalCustomerDeleteView.as_view(),
          name='portal_customer_delete'),
     path('reset/', views.PortalResetView.as_view(), name='portal_reset'),
+    path('quickstart/', views.PortalQuickStartView.as_view(), name='quickstart'),
 ]
