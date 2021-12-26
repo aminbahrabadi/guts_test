@@ -22,22 +22,24 @@ You can test live demo here: [Theater Seating Algorithm / API](https://guts.ir)
 2. Create seats in the section
 3. Create customers
 4. Seat customers
+### OR
+Click on ```Quickstart``` button on the navbar to create a section with 3 rows and 8 seats in every row.
 ## Reseting
 You can delete all Sections and all Customers by browsing to reset section. The reset section can be found in the navbar items.
 ## Api
-1. Sections Retrieve (GET request):
+### Sections Retrieve (GET request):
 <br />URL: ```api/retrieve-sections/```
-2. Seats Retrieve (POST request):
+### Seats Retrieve (POST request):
 <br />URL: ```api/retrieve-seats/```
 <br />Data load sample: ```{
    "section_id":1
 }```
-3. Ticket wallet api:
+### Ticket wallet api (POST request):
 <br />URL: ```api/retrieve-single-seat/```
 <br />Data load sample: ```{
    "customer_name":"Amin"
 }```
-4. Seat customers api:
+### Seat customers api (POST request):
 <br />URL: ```api/bulk-seating/```
 <br />Data load sample: ```{
    "section_id":1,
